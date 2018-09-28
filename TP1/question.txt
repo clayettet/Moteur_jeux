@@ -5,9 +5,6 @@ HMIN317 Moteur de jeux - TP1
 --QUESTION 1
 MainWidget --> Ajoute la possibilité de faire une rotation grâce à la souris avec la simulation de l'élan ainsi qu'une texture à l'objet cubique. Ajoute donc les fonctions accessoires (widget!).
 GeometryEngine --> Instancie, initialise puis dessine la géométrie propre au cube. 
-
-fshader.glsl --> /////////////////////////////////////////////
-vshader.glsl -->/////////////////////////////////////////////////////
 ------------------------------------
 
 --QUESTION 2
