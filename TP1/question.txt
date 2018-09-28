@@ -2,21 +2,38 @@ CLAYETTE Théo - IMAGINA
 HMIN317 Moteur de jeux - TP1
 
 
-QUESTION 1
-MainWidget -->
-GeometryEngine --> 
+--QUESTION 1
+MainWidget --> Ajoute la possibilité de faire une rotation grâce à la souris avec la simulation de l'élan ainsi qu'une texture à l'objet cubique. Ajoute donc les fonctions accessoires (widget!).
+GeometryEngine --> Instancie, initialise puis dessine la géométrie propre au cube. 
 
-fshader.glsl --> 
-vshader.glsl -->
+fshader.glsl --> /////////////////////////////////////////////
+vshader.glsl -->/////////////////////////////////////////////////////
+------------------------------------
+
+--QUESTION 2
+void GeometryEngine::initCubeGeometry(){
+	- On commence par créer les 6 faces carrées en initialisant les 4*6 sommets (vertex). Il est nécessaire de creér chaque face indépendamment pour pouvoir appliquer une texture sur ces faces par la suite.
+	- On relie ensuite ces sommets par une suite de leur indice qui sera ensuite transformée en "triangle strip" afin de créer la structure cubique.
+	-Cette fonction sert donc à la création de la structure du cube à proprement parler.
+}
 
 
-QUESTION 2
-void GeometryEngine::initCubeGeometry()
+drawPlaneGeometry(QOpenGLShaderProgram	*program){ 
+	Cette fonction sert a interpréter notre structure cubique faite de triangle strip en tant qu'objet visuellement lisible.
+}
+------------------------------------
 
-void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
+--QUESTION 3
+Pour transformer notre cube en surface plane il suffit de définir toutes les coordonnées de profondeur (axe z) sur une unité invariante - nous choisirons 0 ici - puis de déplacer les cubes côte à côte en modifiant les coordonnées x et y de leurs sommets telles que désirées.
 
+La nouvelle forme de notre objet étant plus grande, ce dernier ne rentrait pas dans le champ de vision de notre caméra. Ainsi j'ai modifié les paramètres de la caméra de sorte que le FOV soit plus étendu (75) et que les limites de distance maximale et minimale soient élargies (1-17) afin que l'objet reste entièrement visible lors des rotations.
+------------------------------------
 
-QUESTION 3
+--QUESTION 4
+On modifie donc la hauteur de certains sommets en faisant attention à ce que les arêtes communes aux faces adjacentes correspondent toujours.
 
+On modifie ensuite les paramètres de l'appel de la fonction marix.translate() pour pouvoir les associer à des compteurs liés à une fonction keyPressEvent();
+Ainsi à chaque fois qu'une touche fléchée est pressée la position de la caméra est modifiée afin de simuler un déplacement.
+------------------------------------
 
-QUESTION 4
+--BONUS
