@@ -1,0 +1,22 @@
+CLAYETTE Théo - IMAGINA
+HMIN317 Moteur de jeux - TP1
+
+
+QUESTION 1
+MainWidget -->
+GeometryEngine --> 
+
+fshader.glsl --> 
+vshader.glsl -->
+
+
+QUESTION 2
+void GeometryEngine::initCubeGeometry()
+
+void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
+
+
+QUESTION 3
+
+
+QUESTION 4
