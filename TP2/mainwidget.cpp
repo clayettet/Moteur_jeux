@@ -55,10 +55,7 @@
 
 #include <math.h>
 
-//camera position
-double tx = -10.0;
-double ty = 0.0;
-double tz = -5.0;
+int rotationspeed = 1;
 
 MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
@@ -79,20 +76,15 @@ MainWidget::~MainWidget()
 }
 
 void MainWidget::keyPressEvent(QKeyEvent *e){
-/*
     if(e->key() == Qt::Key_Up){
-        ty--;
-    }
-    if(e->key() == Qt::Key_Left){
-        tx++;
+        rotationspeed++;
     }
     if(e->key() == Qt::Key_Down){
-        ty++;
+        if(rotationspeed>0){
+            rotationspeed--;
+        }
     }
-    if(e->key() == Qt::Key_Right){
-        tx--;
-    }
-    update();*/
+    update();
 }
 
 //! [0]
@@ -125,19 +117,12 @@ void MainWidget::mouseReleaseEvent(QMouseEvent *e)
 //! [1]
 void MainWidget::timerEvent(QTimerEvent *)
 {
-    // Decrease angular speed (friction)
-    angularSpeed *= 0.99;
+    angularSpeed = rotationspeed;
+    // Update rotation
+    rotation = QQuaternion::fromAxisAndAngle(rotationAxis, angularSpeed) * rotation;
 
-    // Stop rotation when speed goes below threshold
-    if (angularSpeed < 0.01) {
-        angularSpeed = 0.0;
-    } else {
-        // Update rotation
-        rotation = QQuaternion::fromAxisAndAngle(rotationAxis, angularSpeed) * rotation;
-
-        // Request an update
-        update();
-    }
+    // Request an update
+    update();
 }
 //! [1]
 

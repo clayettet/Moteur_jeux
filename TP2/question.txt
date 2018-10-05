@@ -6,3 +6,8 @@ HMIN317 Moteur de jeux
 --BONUS
 
 La coloration des sommets en fonction de la hauteur a été implémentée.
+
+--Question 3
+La classe Timer implémente une notion de temps dans l'algorithme, elle peut par exemple servir dans la fonction timerEvent() pour décrémenter la vitesse de rotation en fonction du temps, ou définir les moments pendant lesquels appliquer une rotation dans la question 3.
+
+Il est donc possible de donner un élan à la structure puis de modifier sa vitesse avec les touches fléchées haut et bas.
