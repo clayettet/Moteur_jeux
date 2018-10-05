@@ -79,6 +79,7 @@ MainWidget::~MainWidget()
 }
 
 void MainWidget::keyPressEvent(QKeyEvent *e){
+/*
     if(e->key() == Qt::Key_Up){
         ty--;
     }
@@ -91,7 +92,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
     if(e->key() == Qt::Key_Right){
         tx--;
     }
-    update();
+    update();*/
 }
 
 //! [0]
@@ -154,7 +155,7 @@ void MainWidget::initializeGL()
     glEnable(GL_DEPTH_TEST);
 
     // Enable back face culling
-    glEnable(GL_CULL_FACE);
+    // glEnable(GL_CULL_FACE);
 //! [2]
 
     geometries = new GeometryEngine;
@@ -209,7 +210,7 @@ void MainWidget::resizeGL(int w, int h)
     qreal aspect = qreal(w) / qreal(h ? h : 1);
 
     // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
-    const qreal zNear = 1.0, zFar = 17.0, fov = 75.0;
+    const qreal zNear = 1.0, zFar = 17.0, fov = 40.0;
 
     // Reset projection
     projection.setToIdentity();
@@ -229,7 +230,7 @@ void MainWidget::paintGL()
 //! [6]
     // Calculate model view transformation
     QMatrix4x4 matrix;
-    matrix.translate(tx, ty, tz);
+    matrix.translate(0, 0, -5);
     matrix.rotate(rotation);
 
     // Set modelview-projection matrix
