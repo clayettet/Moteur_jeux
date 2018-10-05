@@ -73,6 +73,9 @@ public:
     ~MainWidget();
 
 protected:
+
+    void keyPressEvent(QKeyEvent *e);
+
     void mousePressEvent(QMouseEvent *e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;
     void timerEvent(QTimerEvent *e) override;
