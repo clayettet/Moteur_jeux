@@ -15,7 +15,7 @@ void GeometryEngine::initCubeGeometry(){
 }
 
 
-drawPlaneGeometry(QOpenGLShaderProgram	*program){ 
+drawCubeGeometry(QOpenGLShaderProgram	*program){ 
 	Cette fonction sert a interpréter notre structure cubique faite de triangle strip en tant qu'objet visuellement lisible.
 }
 ------------------------------------
@@ -32,5 +32,3 @@ On modifie donc la hauteur de certains sommets en faisant attention à ce que le
 On modifie ensuite les paramètres de l'appel de la fonction marix.translate() pour pouvoir les associer à des compteurs liés à une fonction keyPressEvent();
 Ainsi à chaque fois qu'une touche fléchée est pressée la position de la caméra est modifiée afin de simuler un déplacement.
 ------------------------------------
-
---BONUS
