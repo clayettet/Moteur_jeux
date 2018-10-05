@@ -6,5 +6,5 @@ Les réponses aux questions se trouvent dans le fichier [question.txt](https://g
 
 ## [TP2 - Game	loop	et	timers](https://github.com/clayettet/Moteur_jeux/tree/master/TP2)
 
-![alt text][result]
-[result]: https://github.com/clayettet/Moteur_jeux/blob/master/TP2/result.png
+![alt text][logo]
+[logo]: https://github.com/clayettet/Moteur_jeux/blob/master/TP2/result.png "Résultat"
