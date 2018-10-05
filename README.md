@@ -8,4 +8,6 @@ Les réponses aux questions se trouvent dans le fichier [question.txt](https://g
 ## [TP2 - Game	loop	et	timers](https://github.com/clayettet/Moteur_jeux/tree/master/TP2)
 [Sujet](https://github.com/clayettet/Moteur_jeux/blob/master/TP2/2017_02_TP_TIMER.pdf)
 
+Les réponses aux questions se trouvent dans le fichier [question.txt](https://github.com/clayettet/Moteur_jeux/blob/master/TP2/question.txt)
+
 ![alt text](https://github.com/clayettet/Moteur_jeux/blob/master/TP2/result.png "Résultat")
