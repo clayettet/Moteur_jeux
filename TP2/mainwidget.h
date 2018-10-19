@@ -69,8 +69,10 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 
 public:
-    explicit MainWidget(QWidget *parent = 0);
+    explicit MainWidget(int season, QWidget *parent = 0);
     ~MainWidget();
+
+    void nextSeason();
 
 protected:
 
@@ -86,8 +88,8 @@ protected:
 
     void initShaders();
     void initTextures();
-
 private:
+    int season;
     QBasicTimer timer;
     QOpenGLShaderProgram program;
     GeometryEngine *geometries;

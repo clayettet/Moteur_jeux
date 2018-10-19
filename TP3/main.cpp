@@ -48,35 +48,30 @@
 **
 ****************************************************************************/
 
-#ifndef GEOMETRYENGINE_H
-#define GEOMETRYENGINE_H
+#include <QApplication>
+#include <QLabel>
+#include <QSurfaceFormat>
 
-#include <QOpenGLFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
+#ifndef QT_NO_OPENGL
 #include "mainwidget.h"
-#include <QImage>
+#endif
 
-class GeometryEngine : protected QOpenGLFunctions
+int main(int argc, char *argv[])
 {
-public:
-    GeometryEngine(int season);
-    virtual ~GeometryEngine();
+    QApplication app(argc, argv);
 
-    void drawPlaneGeometry(QOpenGLShaderProgram *program);
-    void drawMapGeometry(QOpenGLShaderProgram *program);
+    QSurfaceFormat format;
+    format.setDepthBufferSize(24);
+    QSurfaceFormat::setDefaultFormat(format);
 
-    void initPlaneGeometry();
-    void initMapGeometry();
-
-    QImage heightmap;
-
-    int season;
-private:
-
-    QOpenGLBuffer arrayBuf;
-    QOpenGLBuffer indexBuf;
-
-};
-
-#endif // GEOMETRYENGINE_H
+    app.setApplicationName("plane");
+    app.setApplicationVersion("0.1");
+#ifndef QT_NO_OPENGL
+    MainWidget widget;
+    widget.show();
+#else
+    QLabel note("OpenGL Support required");
+    note.show();
+#endif
+    return app.exec();
+}

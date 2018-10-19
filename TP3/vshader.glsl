@@ -8,7 +8,6 @@ uniform mat4 mvp_matrix;
 
 attribute vec4 a_position;
 attribute vec2 a_texcoord;
-attribute vec3 a_color;
 
 varying vec2 v_texcoord;
 varying vec4 my_color;
@@ -18,8 +17,15 @@ void main()
 {
     // Calculate vertex position in screen space
     gl_Position = mvp_matrix * a_position;
+    if (a_position.y > 0.4)
+    {
+        my_color = vec4(0.3, 0.3, 0.3, 1.0);
+    }
+    else
+    {
+        my_color = vec4(0.3, 0.8, 0.3, 1.0);
+    }
 
-    my_color = vec4(a_color.x - a_position.y, a_color.y - a_position.y, a_color.z - a_position.y, 1.0);
     // Pass texture coordinate to fragment shader
     // Value will be automatically interpolated to fragments inside polygon faces
     v_texcoord = a_texcoord;

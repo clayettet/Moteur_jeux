@@ -51,9 +51,12 @@
 #include <QApplication>
 #include <QLabel>
 #include <QSurfaceFormat>
+#include <iostream>
 
 #ifndef QT_NO_OPENGL
 #include "mainwidget.h"
+#include "masterwidget.h"
+
 #endif
 
 int main(int argc, char *argv[])
@@ -66,9 +69,28 @@ int main(int argc, char *argv[])
 
     app.setApplicationName("plane");
     app.setApplicationVersion("0.1");
+
 #ifndef QT_NO_OPENGL
-    MainWidget widget;
-    widget.show();
+    app.setApplicationName("widgetSummer");
+    MainWidget widgetSummer(0);
+    widgetSummer.show();
+    app.setApplicationName("widgetFall");
+    MainWidget widgetFall(1);
+    widgetFall.show();
+    app.setApplicationName("widgetWinter");
+    MainWidget widgetWinter(2);
+    widgetWinter.show();
+    app.setApplicationName("widgetSpring");
+    MainWidget widgetSpring(3);
+    widgetSpring.show();
+
+    MasterWidget masterWidget;
+    masterWidget.fallWidget = &widgetFall;
+    masterWidget.summerWidget = &widgetSummer;
+    masterWidget.winterWidget = &widgetWinter;
+    masterWidget.springWidget = &widgetSpring;
+
+
 #else
     QLabel note("OpenGL Support required");
     note.show();

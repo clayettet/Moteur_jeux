@@ -53,16 +53,15 @@
 #include <QVector2D>
 #include <QVector3D>
 #include <QImage>
-#include <QtMath>
+#include <math.h>
 struct VertexData
 {
     QVector3D position;
     QVector2D texCoord;
-    QVector3D color;
 };
 
 //! [0]
-GeometryEngine::GeometryEngine(int pSeason)
+GeometryEngine::GeometryEngine()
     : indexBuf(QOpenGLBuffer::IndexBuffer)
 {
     initializeOpenGLFunctions();
@@ -70,10 +69,6 @@ GeometryEngine::GeometryEngine(int pSeason)
     // Generate 2 VBOs
     arrayBuf.create();
     indexBuf.create();
-
-    this->season = pSeason;
-
-    heightmap = QImage(":/heightmap-3.png"); //load map
 
     // Initializes cube geometry and transfers it to VBOs
     initPlaneGeometry();
@@ -89,6 +84,7 @@ GeometryEngine::~GeometryEngine()
 //! [0]
 
 void GeometryEngine::initMapGeometry(){
+    QImage img = QImage(":/heightmap-3.png"); //load map
 
 }
 
@@ -118,8 +114,11 @@ void GeometryEngine::drawMapGeometry(QOpenGLShaderProgram *program)
     glDrawElements(GL_TRIANGLE_STRIP, 34, GL_UNSIGNED_SHORT, 0);
 }
 
-void GeometryEngine::initPlaneGeometry()
-{
+void GeometryEngine::initPlaneGeometry(){
+
+    QImage img = QImage(":/heightmap-3.png"); //load map
+
+
     int vertexCount = 16 * 16;
     int sqrtVertexCount = (int)sqrt(vertexCount);
 
@@ -140,30 +139,14 @@ void GeometryEngine::initPlaneGeometry()
         x = 0;
         for (float i = 0.0 - (size / 2.0); i <= 0.0 + (size/ 2.0); i += step)
         {
+
+
             VertexData vertex;
             vertex.texCoord = QVector2D(0.6666+x * stepTexX, y * stepTexY);
 
-            QRgb color = heightmap.pixel(qFloor(x * 1.0f / (sqrtVertexCount - 1) * (heightmap.width() - 1)), qFloor(y * 1.0f / (sqrtVertexCount - 1) * (heightmap.height() - 1)));
+            QRgb color = img.pixel(x * 1.0f / (sqrtVertexCount - 1) * 500, y * 1.0f / (sqrtVertexCount - 1) * 500);
 
             vertex.position = QVector3D(i, maxY * qGray(color) / 255, j);
-            switch (this->season)
-            {
-                case 0:
-                    vertex.color = QVector3D(1.0f, 1.0f , 0.0f);
-                    break;
-                case 1:
-                    vertex.color = QVector3D(1.0f, 0.5f, 0.0f);
-                    break;
-                case 2:
-                    vertex.color = QVector3D(1.0f, 1.0f, 1.0f);
-                    break;
-                case 3:
-                    vertex.color = QVector3D(0.0f, 1.0f, 0.0f);
-                    break;
-                default:
-                    vertex.color = QVector3D(1.0f, 1.0f, 1.0f);
-                    break;
-            }
 
             vertices[index++] = vertex;
             x++;
@@ -213,14 +196,8 @@ void GeometryEngine::initPlaneGeometry()
 void GeometryEngine::drawPlaneGeometry(QOpenGLShaderProgram *program)
 {
     // Tell OpenGL which VBOs to use
-    if(!arrayBuf.bind())
-    {
-        std::cout << "error bind arrayBuf" << std::endl;
-    }
-    if(!indexBuf.bind())
-    {
-        std::cout << "error bind indexBuf" << std::endl;
-    }
+    arrayBuf.bind();
+    indexBuf.bind();
 
     // Offset for position
     quintptr offset = 0;
@@ -237,13 +214,6 @@ void GeometryEngine::drawPlaneGeometry(QOpenGLShaderProgram *program)
     int texcoordLocation = program->attributeLocation("a_texcoord");
     program->enableAttributeArray(texcoordLocation);
     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
-
-    offset += sizeof(QVector2D);
-
-    // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
-    int colorLocation = program->attributeLocation("a_color");
-    program->enableAttributeArray(colorLocation);
-    program->setAttributeBuffer(colorLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
     // Draw cube geometry using indices from VBO 1
     glDrawElements(GL_TRIANGLES, 1350, GL_UNSIGNED_SHORT, 0);

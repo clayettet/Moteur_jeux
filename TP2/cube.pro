@@ -3,7 +3,8 @@ QT       += core gui widgets
 TARGET = cube
 TEMPLATE = app
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    masterwidget.cpp
 
 SOURCES += \
     mainwidget.cpp \
@@ -11,7 +12,8 @@ SOURCES += \
 
 HEADERS += \
     mainwidget.h \
-    geometryengine.h
+    geometryengine.h \
+    masterwidget.h
 
 RESOURCES += \
     shaders.qrc \

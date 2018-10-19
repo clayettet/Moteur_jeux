@@ -54,29 +54,21 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
-#include "mainwidget.h"
-#include <QImage>
 
 class GeometryEngine : protected QOpenGLFunctions
 {
 public:
-    GeometryEngine(int season);
+    GeometryEngine();
     virtual ~GeometryEngine();
 
     void drawPlaneGeometry(QOpenGLShaderProgram *program);
     void drawMapGeometry(QOpenGLShaderProgram *program);
 
+private:
     void initPlaneGeometry();
     void initMapGeometry();
-
-    QImage heightmap;
-
-    int season;
-private:
-
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;
-
 };
 
 #endif // GEOMETRYENGINE_H

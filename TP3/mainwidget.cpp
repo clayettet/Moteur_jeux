@@ -52,19 +52,17 @@
 
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <iostream>
+
 #include <math.h>
 
 int rotationspeed = 1;
 
-MainWidget::MainWidget(int season, QWidget *parent) :
+MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
     geometries(0),
     texture(0),
-    angularSpeed(0),
-    season(season)
+    angularSpeed(0)
 {
-
 }
 
 MainWidget::~MainWidget()
@@ -145,18 +143,10 @@ void MainWidget::initializeGL()
     // glEnable(GL_CULL_FACE);
 //! [2]
 
-    geometries = new GeometryEngine(this->season);
+    geometries = new GeometryEngine;
 
     // Use QBasicTimer because its faster than QTimer
     timer.start(12, this);
-}
-
-void MainWidget::nextSeason()
-{
-    this->season = (++this->season) % 4;
-    geometries->season = this->season;
-    std::cout << "season de " << this << ": " << std::to_string(geometries->season) << std::endl;
-    geometries->initPlaneGeometry();
 }
 
 //! [3]
